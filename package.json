@@ -1,0 +1,22 @@
+{
+  "name": "ub-script",
+  "version": "0.8.0",
+  "description": "Small functional-like programming language",
+  "main": "uscript.js",
+  "bin": {
+    "ubot": "uscript.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoNiceElijah/ub-script.git"
+  },
+  "author": "soniceelijah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SoNiceElijah/ub-script/issues"
+  },
+  "homepage": "https://github.com/SoNiceElijah/ub-script#readme"
+}
