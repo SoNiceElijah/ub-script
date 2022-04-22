@@ -1,0 +1,32 @@
+:fn lt x
+    y => y < x
+
+:fn gt x
+    y => y > x
+
+:fn le x
+    y => y <= x
+
+:fn ge x
+    y => y >= x
+
+:fn eq x
+    y => y == x
+
+:fn and f g
+    x => f x && g x
+
+:fn or f g
+    x => f x || g x
+
+:fn ne f
+    x => not (f x)
+
+:fn nop x
+    x
+
+:fn not x
+    match x
+        true -> false
+        false -> true
+        _ -> nop _

@@ -33,7 +33,7 @@ function App() {
         </p>
         <pre>
           <code>
-            $ npm i -g ubot 
+            $ npm i -g ub-script 
           </code>
         </pre>
 
@@ -45,7 +45,7 @@ function App() {
         </p>
         <pre>
           <code>
-            ubot init
+            $ ubot init
           </code>
         </pre>
         <p>
@@ -68,11 +68,11 @@ function App() {
         <p>
           Отлично! Теперь соберем проект 
         </p>
-        <pre><code>ubot --build</code></pre>
+        <pre><code>$ ubot build</code></pre>
         <p>
           И запустим
         </p>
-        <pre><code>node index.js</code></pre>
+        <pre><code>$ node index.js</code></pre>
 
 
         <h1>Основы</h1>
@@ -135,7 +135,7 @@ function App() {
           Если аргумент не является атомарным, то он заключается в скобки.
         </p>
         <pre>
-          <code>
+          <code className='language-ubot'>
             {
 `:main main args
     lambda <- x => t1 t2 => str => concat x t1 t2 str
@@ -156,7 +156,7 @@ function App() {
           В языке присутствует условный оператор
         </p>
         <pre>
-          <code>
+          <code className='language-ubot'>
             {
 `:main main args
     x <- 40
@@ -242,7 +242,7 @@ function App() {
         </p>
         <h2>Типы</h2>
         <pre>
-          <code>
+          <code className='language-ubot'>
 {
 `:decl TypeName param_x param_y
     type : 'box'
@@ -269,7 +269,7 @@ function App() {
           Объекты основные сущности pattern-match'инга.
         </p>
         <pre>
-          <code>
+          <code className='language-ubot'>
 {
 `:decl Box x
     # Поле объекта и его значение
@@ -322,10 +322,9 @@ function App() {
           Если распаковываемый тип не является необходимым типом - будет кинуто исключение.
         </p>
         <pre>
-          <code>
+          <code className='language-ubot'>
 {
-`
-:decl Box x
+`:decl Box x
     type : 'box'
     value : x
 
@@ -345,6 +344,46 @@ function App() {
 
     # RuntimeError Type [Vox] not matched!
     Vox v <- obj_ 
+
+    lambda <- (Box x) _ => print x
+    res <- lambda (Box 3) # ok
+
+    lambda <- (Vox) _ => print x
+    res <- lambda (Box 3) # runtime error...
+`
+}
+          </code>
+        </pre>
+        <h1>Примеры</h1>
+        <h2>Express</h2>
+        <pre>
+          <code className='language-ubot'>
+{
+`:import express :: 'express'
+
+:decl App g l
+  get : g
+  listen : l
+
+:decl Req q
+  query : q
+
+:decl Res s
+  send : s
+
+:decl GoodQuery x
+  from : "base"
+  resource : x
+
+:main main args
+  App a_get a_listen <- express _
+  a_get "/" !
+    (Req query) (Res send) => 
+      match query
+        GoodQuery r -> send (concat "Got " r "from base")
+        _ -> send "Bad query, sorry :("
+  a_listen !
+    x => print "Server online!"
 `
 }
           </code>

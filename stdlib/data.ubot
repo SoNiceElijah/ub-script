@@ -1,0 +1,43 @@
+:decl Pair x y
+    'first' : x
+    'second' : y
+    type : 'ubot_pair'
+
+:decl LstMod ma fl fi
+    map : ma
+    filter : fl
+
+:decl LstFnd f
+    find : f
+
+:decl LstApp pu po sh
+    push : pu
+    pop : po
+    shift : sh
+
+:fn pair x y
+    pack "first" x "second" y "type" "ubot_pair"
+
+:fn carr_pair x
+    y => pair x y
+
+:fn fmap_pair p g
+    match p
+        Pair fst snd -> Pair fst (g snd)
+        _ -> p
+
+:fn ap_pair p g
+    match g
+        Pair a f -> 
+            match (fmap_pair p f)
+                Pair b res -> Pair (a + b) res
+                _ -> p
+        _ -> p
+
+:fn mon_pair p f
+    match p
+        Pair a x -> match (f x)
+            Pair b res -> Pair (a + b) res
+            _ -> p
+        _ -> p
+

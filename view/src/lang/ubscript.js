@@ -14,7 +14,7 @@ export default function _ubotscript(hljs) {
         name: 'UBScript',
         case_insensitive: false,
         keywords: {
-          $pattern : ':?[a-zA-Z]+',
+          $pattern : ':?[a-zA-Z]+\\b',
           keyword: KEYWORD,
           built_in: BUILTIN,
           literal: LITERAL

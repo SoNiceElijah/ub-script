@@ -1,0 +1,18 @@
+:fn sqr x
+    x * x
+
+:fn sqrt x
+    g <- get Math "sqrt" 
+    g x
+
+:fn log x
+    g <- get Math "log" 
+    g x
+
+:fn exp x
+    g <- get Math "exp" 
+    g x
+
+:fn floor x
+    g <- get Math "floor" 
+    g x

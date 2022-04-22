@@ -1,0 +1,36 @@
+
+:decl Node v r
+    value : v
+    rest : r
+
+:fn nop x
+    x
+
+:fn add v n
+    Node v n
+
+:fn foldl g a xs
+    match xs
+        Node v r -> foldl g (g a v) r 
+        _ -> a
+
+:fn map g xs
+    match xs
+        Node v r -> Node (g v) (map g r)
+        _ -> nop _
+
+:fn print xs
+    concat "[" (print_inner xs) "]"
+
+:fn print_inner xs
+    match xs
+        Node v (Node x s) -> concat v ", " (print_inner (Node x s))
+        Node v _ -> concat v
+        _ -> false
+
+:fn iterate g n
+    match n
+        Node v r -> 
+            g v
+            iterate g r
+        _ -> nop _
